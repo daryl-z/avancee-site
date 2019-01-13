@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: path.join(__dirname, "src", "index.js"),
   module: {
     rules: [
       {
@@ -28,7 +28,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
-    contentBase: "./dist",
+    contentBase: path.join(__dirname, "dist"),
     hot: true
   }
 };
