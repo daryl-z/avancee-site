@@ -1,16 +1,22 @@
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-  entry: path.join(__dirname, "src", "index.js"),
+  entry: path.join(__dirname, "src", "index.tsx"),
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         use: ["babel-loader"]
+      },
+      {
+        test: /\.js$/,
+        use: ["source-map-loader"],
+        enforce: "pre"
       },
       {
         test: /\.css$/,
@@ -36,7 +42,7 @@ module.exports = {
       Utils: path.resolve(__dirname, "src/utils/"),
       Compo: path.resolve(__dirname, "src/components/")
     },
-    extensions: ["*", ".js", ".jsx"]
+    extensions: ["*", ".ts", ".tsx", ".js", ".json"]
   },
   output: {
     path: __dirname + "/dist",
@@ -48,7 +54,8 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html")
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new CleanWebpackPlugin([path.join(__dirname, "dist")])
+    new CleanWebpackPlugin([path.join(__dirname, "dist")]),
+    new ForkTsCheckerWebpackPlugin()
   ],
   devServer: {
     contentBase: path.join(__dirname, "dist"),
