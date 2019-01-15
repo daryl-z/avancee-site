@@ -2,9 +2,14 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const merge = require("webpack-merge");
+const argv = require("yargs-parser")(process.argv.slice(2));
+const _mode = argv.mode || "development";
+const _modeflag = _mode == "production" ? true : false;
+const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const path = require("path");
 
-module.exports = {
+webpackConfig = {
   entry: path.join(__dirname, "src", "index.tsx"),
   module: {
     rules: [
@@ -44,11 +49,6 @@ module.exports = {
     },
     extensions: ["*", ".ts", ".tsx", ".js", ".json"]
   },
-  output: {
-    path: __dirname + "/dist",
-    publicPath: "/",
-    filename: "bundle.js"
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "src", "index.html")
@@ -56,9 +56,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin([path.join(__dirname, "dist")]),
     new ForkTsCheckerWebpackPlugin()
-  ],
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    hot: true
-  }
+  ]
 };
+
+module.exports = merge(_mergeConfig, webpackConfig);
