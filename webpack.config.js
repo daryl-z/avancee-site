@@ -5,7 +5,6 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const merge = require("webpack-merge");
 const argv = require("yargs-parser")(process.argv.slice(2));
 const _mode = argv.mode || "development";
-const _modeflag = _mode == "production" ? true : false;
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const path = require("path");
 
