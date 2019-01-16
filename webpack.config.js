@@ -9,6 +9,15 @@ const _mode = argv.mode || "development";
 const _modeflag = _mode == "production" ? true : false;
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const path = require("path");
+const typingsForCssModulesLoaderConf = {
+  loader: "typings-for-css-modules-loader",
+  options: {
+    modules: true,
+    namedExport: true,
+    camelCase: true,
+    sass: true
+  }
+};
 
 webpackConfig = {
   entry: path.join(__dirname, "src", "index.tsx"),
@@ -28,7 +37,9 @@ webpackConfig = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           !_modeflag ? "style-loader" : MiniCssExtractPlugin.loader,
-          "css-loader",
+          // "css-loader",
+          // typingsForCssModulesLoaderConf,
+          "css-loader?modules&importLoaders=true&localIdentName=[name]__[local]___[hash:base64:5]",
 
           "postcss-loader",
           "sass-loader"
