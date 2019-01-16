@@ -3,8 +3,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const merge = require("webpack-merge");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const argv = require("yargs-parser")(process.argv.slice(2));
 const _mode = argv.mode || "development";
+const _modeflag = _mode == "production" ? true : false;
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const path = require("path");
 
@@ -23,9 +25,14 @@ webpackConfig = {
         enforce: "pre"
       },
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: ["style-loader", "css-loader"]
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          !_modeflag ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+
+          "postcss-loader",
+          "sass-loader"
+        ]
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -53,6 +60,12 @@ webpackConfig = {
       template: path.join(__dirname, "src", "index.html")
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: _modeflag ? "styles/[name].[hash:5].css" : "styles/[name].css",
+      chunkFilename: _modeflag
+        ? "styles/[id].[hash:5].css"
+        : "styles/[name].css"
+    }),
     new CleanWebpackPlugin([path.join(__dirname, "dist")]),
     new ForkTsCheckerWebpackPlugin()
   ]
