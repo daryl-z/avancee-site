@@ -35,6 +35,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.3",
     "@types/jest": "^23.3.12",
     "@types/webpack-env": "^1.13.6",
+    "@uifabric/fluent-theme": "^0.13.2",
     "autoprefixer": "^9.4.5",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.0",
