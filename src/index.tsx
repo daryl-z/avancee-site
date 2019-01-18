@@ -1,11 +1,8 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 
-ReactDOM.render(
-  <App compiler="TypeScript" framework="React" />,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById('root'));
 
 module.hot.accept();

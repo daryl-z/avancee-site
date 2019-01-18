@@ -9,14 +9,6 @@ import { Link } from 'react-router-dom';
 const Home = lazy(() => import('./routes/Home/Home'));
 const About = lazy(() => import('./routes/About/About'));
 const Login = lazy(() => import('./routes/Login/Login'));
-export interface IHelloProps {
-  compiler: string;
-  framework: string;
-}
-
-interface IState {
-  readonly counter: number;
-}
 
 loadTheme({
   palette: {
@@ -44,7 +36,7 @@ loadTheme({
     white: '#ffffff'
   }
 });
-export default function App({ compiler, framework }: IHelloProps): JSX.Element {
+export default function App(props: object): JSX.Element {
   return (
     // preview fluent ui
     // <Customizer {...FluentCustomizations}>
