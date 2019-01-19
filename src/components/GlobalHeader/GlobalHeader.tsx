@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as styles from './index.m.css';
 
-export default class GlobalHeader extends React.Component<any, any> {
-  public render(): JSX.Element {
-    return <div className={styles.HeaderWrapper}>header</div>;
-  }
-}
+const GlobalHeader: React.FunctionComponent = () => {
+  return <div className={styles.HeaderWrapper}>header</div>;
+};
+
+export default GlobalHeader;
