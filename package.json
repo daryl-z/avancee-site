@@ -38,6 +38,7 @@
     "@types/jest": "^23.3.12",
     "@types/webpack-env": "^1.13.6",
     "@uifabric/fluent-theme": "^0.13.2",
+    "@uifabric/styling": "^6.41.0",
     "autoprefixer": "^9.4.5",
     "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^1.0.0",
@@ -72,9 +73,11 @@
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
     "@types/react-router-dom": "^4.3.1",
+    "formik": "^1.4.2",
     "office-ui-fabric-react": "^6.125.0",
     "react": "^16.8.0-alpha.0",
     "react-dom": "^16.8.0-alpha.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "yup": "^0.26.7"
   }
 }
