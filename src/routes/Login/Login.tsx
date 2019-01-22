@@ -20,7 +20,7 @@ const Login: React.FunctionComponent = props => {
 
   return (
     <div>
-      <div className={css(classNames.login)}>
+      <div className={`${styles.login} ${css(classNames.login)}`}>
         <div className={styles.header}>
           <a className={styles.logo}>
             Logo
@@ -71,6 +71,11 @@ const Login: React.FunctionComponent = props => {
                 )}
               </Formik>
             </div>
+          </div>
+          <div className={styles.loginFooter}>
+            <a href="https://github.com/Avancee" target="_blank">
+              About Us
+            </a>
           </div>
         </div>
       </div>
