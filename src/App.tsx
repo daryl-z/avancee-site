@@ -1,42 +1,17 @@
 import * as React from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { loadTheme } from 'office-ui-fabric-react';
 import GlobalErrorBoundary from './components/ErrorBoundaries/GlobalErrorBoundary';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { Link } from 'react-router-dom';
-
-const Home = lazy(() => import('./routes/Home/Home'));
-const About = lazy(() => import('./routes/About/About'));
-const Login = lazy(() => import('./routes/Login/Login'));
+import { defaultTheme } from './utils/themes';
+import routeList from './routes';
+import { IRoute, IChild } from './routes/index.d';
 
 loadTheme({
-  palette: {
-    themePrimary: '#0078d4',
-    themeLighterAlt: '#eff6fc',
-    themeLighter: '#deecf9',
-    themeLight: '#c7e0f4',
-    themeTertiary: '#71afe5',
-    themeSecondary: '#2b88d8',
-    themeDarkAlt: '#106ebe',
-    themeDark: '#005a9e',
-    themeDarker: '#004578',
-    neutralLighterAlt: '#f8f8f8',
-    neutralLighter: '#f4f4f4',
-    neutralLight: '#eaeaea',
-    neutralQuaternaryAlt: '#dadada',
-    neutralQuaternary: '#d0d0d0',
-    neutralTertiaryAlt: '#c8c8c8',
-    neutralTertiary: '#c2c2c2',
-    neutralSecondary: '#858585',
-    neutralPrimaryAlt: '#4b4b4b',
-    neutralPrimary: '#333333',
-    neutralDark: '#272727',
-    black: '#1d1d1d',
-    white: '#ffffff'
-  }
+  palette: defaultTheme
 });
-export default function App(props: object): JSX.Element {
+const App: React.FunctionComponent = () => {
   return (
     // preview fluent ui
     // <Customizer {...FluentCustomizations}>
@@ -45,21 +20,26 @@ export default function App(props: object): JSX.Element {
         <Link to="/">
           <PrimaryButton>Home</PrimaryButton>
         </Link>
-        <Link to="/login">
+        <Link to="/auth/login">
           <PrimaryButton>Login</PrimaryButton>
         </Link>
-        <Link to="/About">
+        <Link to="/about">
           <PrimaryButton>About</PrimaryButton>
         </Link>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
+            {routeList.map((item: IRoute) =>
+              item.children.map((child: IChild) => {
+                return <Route key={child.path} path={`/${item.path}/${child.path}`} component={child.component} />;
+              })
+            )}
+            <Redirect from="/" to="/home/index" exact />
           </Switch>
         </Suspense>
       </GlobalErrorBoundary>
     </Router>
     // </Customizer>
   );
-}
+};
+
+export default App;

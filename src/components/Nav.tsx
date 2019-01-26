@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Nav, INavLink } from 'office-ui-fabric-react/lib/Nav';
 
-export default class NavBasicExample extends React.Component<any, any> {
+export default class NavBasicExample extends React.Component {
   public onLinkClick = (ev: React.MouseEvent<HTMLElement>, item?: INavLink) => {
     if (item && item.name === 'News') {
       alert('News link clicked');
