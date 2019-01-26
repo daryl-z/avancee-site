@@ -5,10 +5,7 @@ import { loadTheme } from 'office-ui-fabric-react';
 import GlobalErrorBoundary from './components/ErrorBoundaries/GlobalErrorBoundary';
 import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { defaultTheme } from './utils/themes';
-
-const Home = lazy(() => import('./routes/Home/Home'));
-const About = lazy(() => import('./routes/About/About'));
-const Login = lazy(() => import('./routes/Login/Login'));
+import AsyncCompo from './routes';
 
 loadTheme({
   palette: defaultTheme
@@ -31,9 +28,9 @@ const App: React.FunctionComponent = () => {
         </Link> */}
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
+            <Route exact path="/" render={() => <AsyncCompo componentName="Home" />} />
+            <Route path="/about" render={() => <AsyncCompo componentName="About" />} />
+            <Route path="/login" render={() => <AsyncCompo componentName="Login" />} />
           </Switch>
         </Suspense>
       </GlobalErrorBoundary>
