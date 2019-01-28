@@ -30,10 +30,9 @@ const App: React.FunctionComponent = () => {
           <Switch>
             {routeList.map((item: IRoute) =>
               item.children.map((child: IChild) => {
-                return <Route key={child.path} path={`/${item.path}/${child.path}`} component={child.component} />;
+                return <Route exact key={child.path} path={`${item.path}${child.path}`} component={child.component} />;
               })
             )}
-            <Redirect from="/" to="/home/index" exact />
           </Switch>
         </Suspense>
       </GlobalErrorBoundary>
