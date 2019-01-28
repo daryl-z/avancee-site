@@ -4,11 +4,11 @@ import { IRoute, IRouteList, IChild } from '../routes/index.d';
 const home: IRoute = {
   key: 'home',
   title: '首页',
-  path: 'home',
+  path: '/',
   children: [
     {
       title: '首页',
-      path: 'index',
+      path: '',
       component: lazy(() => import(/*webpackChunkName: 'Home'*/ '../routes/Home/Home'))
     }
   ]
@@ -17,11 +17,11 @@ const home: IRoute = {
 const login = {
   key: 'login',
   title: '用户登录',
-  path: 'auth',
+  path: '/auth',
   children: [
     {
       title: '用户登录',
-      path: 'login',
+      path: '/login',
       component: lazy(() => import(/*webpackChunkName: 'Home'*/ '../routes/Login/Login'))
     }
   ]
@@ -30,7 +30,7 @@ const login = {
 const about = {
   key: 'about',
   title: '关于',
-  path: 'about',
+  path: '/about',
   children: [
     {
       title: '关于',
