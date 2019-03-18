@@ -1,5 +1,5 @@
 {
-  "name": "minimal-react-webpack-babel-setup",
+  "name": "avancee-site",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -70,13 +70,13 @@
     "yargs-parser": "^11.1.1"
   },
   "dependencies": {
-    "@types/react": "^16.7.18",
-    "@types/react-dom": "^16.0.11",
+    "@types/react": "^16.8.8",
+    "@types/react-dom": "^16.8.2",
     "@types/react-router-dom": "^4.3.1",
     "formik": "^1.4.2",
-    "office-ui-fabric-react": "^6.125.0",
-    "react": "^16.8.0-alpha.0",
-    "react-dom": "^16.8.0-alpha.0",
+    "office-ui-fabric-react": "^6.157.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
     "yup": "^0.26.7"
   }
