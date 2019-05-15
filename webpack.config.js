@@ -68,7 +68,7 @@ webpackConfig = {
       filename: _modeflag ? 'styles/[name].[hash:5].css' : 'styles/[name].css',
       chunkFilename: _modeflag ? 'styles/[id].[hash:5].css' : 'styles/[name].css'
     }),
-    new CleanWebpackPlugin([path.join(__dirname, 'dist')]),
+    new CleanWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
   ]
 };
