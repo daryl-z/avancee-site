@@ -7,6 +7,7 @@ import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
 import { defaultTheme } from './utils/themes';
 import routeList from './routes';
 import { IRoute, IChild } from './routes/index.d';
+import GlobalHeader from './components/GlobalHeader/GlobalHeader';
 
 loadTheme({
   palette: defaultTheme
@@ -17,6 +18,7 @@ const App: React.FunctionComponent = () => {
     // <Customizer {...FluentCustomizations}>
     <Router>
       <GlobalErrorBoundary>
+        <GlobalHeader />
         <Link to="/">
           <PrimaryButton>Home</PrimaryButton>
         </Link>
