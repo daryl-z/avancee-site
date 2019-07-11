@@ -1,12 +1,13 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const argv = require('yargs-parser')(process.argv.slice(2));
 const _mode = argv.mode || 'development';
-const _modeflag = _mode == 'production' ? true : false;
+const _productMode = _mode == 'production' ? true : false;
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const path = require('path');
 const paths = require('./config/paths');
@@ -29,9 +30,16 @@ webpackConfig = {
       {
         test: /\.m.(sa|sc|c)ss$/,
         use: [
-          !_modeflag ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader?modules&importLoaders=true&localIdentName=[name]__[local]___[hash:base64:5]',
-
+          !_productMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              },
+              importLoaders: 1
+            }
+          },
           'postcss-loader',
           'sass-loader'
         ],
@@ -39,7 +47,7 @@ webpackConfig = {
       },
       {
         test: /^((?!\.m).)*(sa|sc|c)ss$/,
-        use: [!_modeflag ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+        use: [!_productMode ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -64,12 +72,20 @@ webpackConfig = {
       template: path.join(__dirname, 'src', 'index.html')
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin({
-      filename: _modeflag ? 'styles/[name].[hash:5].css' : 'styles/[name].css',
-      chunkFilename: _modeflag ? 'styles/[id].[hash:5].css' : 'styles/[name].css'
-    }),
     new CleanWebpackPlugin(),
-    new ForkTsCheckerWebpackPlugin()
+    new ForkTsCheckerWebpackPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'server',
+      analyzerHost: '127.0.0.1',
+      analyzerPort: 8889,
+      reportFilename: 'report.html',
+      defaultSizes: 'parsed',
+      openAnalyzer: true,
+      generateStatsFile: false,
+      statsFilename: 'stats.json',
+      statsOptions: null,
+      logLevel: 'info'
+    })
   ]
 };
 

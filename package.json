@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --config ./webpack.config.js --mode development",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "analyze": "NODE_ENV=production npm_config_report=true npm run build"
   },
   "keywords": [],
   "author": "",
@@ -64,6 +65,7 @@
     "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^2.0.1",
     "webpack": "^4.35.3",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1",
