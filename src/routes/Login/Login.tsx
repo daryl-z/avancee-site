@@ -4,7 +4,7 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { css, classNamesFunction } from 'office-ui-fabric-react/lib/Utilities';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { getStyles, ILoginProps, ILoginStyles } from './Login.styles';
-import { Formik, Form, Field, ErrorMessage, FormikProps } from 'formik';
+// import { Formik, Form, Field, ErrorMessage, FormikProps } from 'formik';
 import { Link } from 'react-router-dom';
 import * as styles from './index.m.scss';
 
@@ -31,45 +31,20 @@ const Login: React.FunctionComponent = props => {
           <div className={styles.loginContent}>
             <h1 className={styles.title}>Log In</h1>
             <div className={styles.inner}>
-              <Formik
-                initialValues={{ email: '', password: '' }}
-                validate={values => {
-                  let errors: IError = {};
-                  if (!values.email) {
-                    errors.email = 'Required';
-                  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-                    errors.email = 'Invalid email address';
-                  }
-                  return errors;
-                }}
-                onSubmit={(values, { setSubmitting }) => {
-                  setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    setSubmitting(false);
-                  }, 400);
-                }}
-              >
-                {({ isSubmitting }) => (
-                  <Form>
-                    <div className="formItem">
-                      <Label htmlFor="anInput">Email Address</Label>
-                      <TextField type="email" name="email" required={true} placeholder="Email" />
-                    </div>
-                    <div className="formItem">
-                      <Label htmlFor="anInput">Password</Label>
-                      <TextField type="password" name="password" required={true} placeholder="Password" />
-                    </div>
-                    <div className={styles.inputHelp}>
-                      <Link to="#">Forget your password</Link>
-                    </div>
-                    <div className="btnWrapper">
-                      <PrimaryButton type="submit" disabled={isSubmitting}>
-                        Login
-                      </PrimaryButton>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
+              <div className="formItem">
+                <Label htmlFor="anInput">Email Address</Label>
+                <TextField type="email" name="email" required={true} placeholder="Email" />
+              </div>
+              <div className="formItem">
+                <Label htmlFor="anInput">Password</Label>
+                <TextField type="password" name="password" required={true} placeholder="Password" />
+              </div>
+              <div className={styles.inputHelp}>
+                <Link to="#">Forget your password</Link>
+              </div>
+              <div className="btnWrapper">
+                <PrimaryButton type="submit">Login</PrimaryButton>
+              </div>
             </div>
           </div>
           <div className={styles.loginFooter}>
