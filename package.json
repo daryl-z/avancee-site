@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --config ./webpack.config.js --mode development",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "analyze": "NODE_ENV=production npm_config_report=true npm run build"
+    "report": "webpack-bundle-analyzer --port 8888 dist/stats.json"
   },
   "keywords": [],
   "author": "",

@@ -16,6 +16,23 @@ module.exports = {
   ],
   devtool: 'source-map',
   optimization: {
-    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})]
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin({})],
+    splitChunks: {
+      cacheGroups: {
+        officeUiFabricReactBase: {
+          name: 'officeUiFabricReact',
+          test: /[\\/]node_modules[\\/](office-ui-fabric-react)[\\/]/,
+          chunks: 'all',
+          priority: 2
+
+        },
+        reactBase: {
+          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+          name: 'react',
+          chunks: 'all',
+          priority: 1
+        }
+      }
+    }
   }
 };
