@@ -75,7 +75,10 @@ webpackConfig = {
     new webpack.HotModuleReplacementPlugin(),
     new CleanWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin()
-  ]
+  ],
+  optimization: {
+    usedExports: true
+  }
 };
 
 if (_productMode) {
