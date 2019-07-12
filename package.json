@@ -1,7 +1,8 @@
 {
   "name": "avancee-site",
   "sideEffects": [
-    "*.css"
+    "*.css",
+    ""
   ],
   "version": "1.0.0",
   "description": "",
