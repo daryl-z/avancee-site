@@ -31,13 +31,14 @@ webpackConfig = {
         test: /\.m.(sa|sc|c)ss$/,
         use: [
           !_productMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-modules-typescript-loader',
           {
             loader: 'css-loader',
             options: {
               modules: {
                 localIdentName: '[path][name]__[local]--[hash:base64:5]'
               },
-              importLoaders: 1
+              importLoaders: 2
             }
           },
           'postcss-loader',

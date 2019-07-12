@@ -3,7 +3,7 @@ import * as styles from './index.m.css';
 
 const GlobalHeader: React.FunctionComponent = ({}) => {
   return (
-    <header id="header">
+    <header id="header" className={styles.test}>
       <button id="action-trigger">&#xe606;</button>
       <a href="#">
         <img src="images/microsoft-gray.png" alt="logo" />
