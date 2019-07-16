@@ -4,7 +4,7 @@
     "sourceMap": true,
     "lib": ["es2015", "dom"],
     "noImplicitAny": true,
-    "module": "commonJS",
+    "module": "es6",
     "target": "es6",
     "jsx": "react",
     "moduleResolution": "node"
